@@ -5,20 +5,22 @@ import 'package:get/get.dart';
 
 class UserDetailsController extends GetxController {
   List<UserDetailsModel> userDetails = [];
-  void checkUserData() async {
+  List<UserDetailsModel> userDetailsSearch = [];
+
+  Future checkUserData() async {
     final userLocalData = LocalStorage.box.read<List>(LocalStorage.userData);
-    if (userLocalData != null) {
-      userDetails.clear();
-      for (var element in userLocalData) {
-        userDetails.add(UserDetailsModel.fromJson(element));
-      }
-      update();
-    } else {
+    if (userLocalData == null || userLocalData.isNotEmpty) {
       await getUserdetails();
       await LocalStorage.box.write(
         LocalStorage.userData,
         userDetails.map((e) => e.toJson()).toList(),
       );
+    } else {
+      userDetails.clear();
+      for (var element in userLocalData) {
+        userDetails.add(UserDetailsModel.fromJson(element));
+      }
+      update();
     }
   }
 

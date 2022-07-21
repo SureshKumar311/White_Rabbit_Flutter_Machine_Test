@@ -8,7 +8,7 @@ class UserDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Employee Details "),
+        title: const Text("Employee Details"),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
